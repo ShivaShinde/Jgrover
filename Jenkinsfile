@@ -4,7 +4,8 @@ pipeline {
         stage('Initialize') {
             steps {
                 sh '''
-                echo "java -version"
+               java -version
+               echo "running some echo commands"
                echo "PATH = ${PATH}"
                echo "M2_HOME = ${M2_HOME}"
                mvn --version 
