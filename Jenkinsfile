@@ -1,8 +1,8 @@
 pipeline {
     agent any
     tools {
-        maven 'maven_3.3.9'
-        jdk 'JDK 1.8.0'
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
     }
     stages {
         stage ('Initialize') {
@@ -16,9 +16,12 @@ pipeline {
 
         stage ('Build') {
             steps {
-                sh '''
-                    mvn -version
-'''
+                sh 'mvn -Dmaven.test.failure.ignore=true install'
+            }
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
             }
         }
     }
