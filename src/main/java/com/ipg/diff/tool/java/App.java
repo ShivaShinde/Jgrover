@@ -9,60 +9,54 @@ import org.apache.commons.io.FileUtils;
 /**
  * Diff App!
  */
-public class App 
-{
-    public static void main( String[] args ) throws Exception
-    {
-        File file3 = new File("src/main/resources/RNB1.txt");
-        File file4 = new File("src/main/resources/RNB2.txt");
+public class App {
 
-        System.out.println("Printing the raw file size "+file3.length());
-
-        Scanner sc=new Scanner(file3);
-
-        while(sc.hasNextLine())
-        {
-            System.out.println("Printing the file3 contents");
-            System.out.println(sc.nextLine());
+    public void schemaComparision(BufferedReader br1, BufferedReader br2) throws IOException {
+        try {
+            if (br1.readLine().equals(br2.readLine())) {
+                System.out.println("**Schema Comparision Success**");
+                linesComparision(br1, br2);
+            } else {
+                System.out.println("**Schema Comparision Failure**" + "\n" + "Schema from RNB1: " + br1.readLine() + "\n" + "Schema from RNB2: " + br2.readLine());
+            }
+        } catch (IOException e) {
+            throw new IOException("Problem reading a line", e);
         }
+    }
 
-        System.out.println(new File("RNB1.txt").getAbsolutePath());
+    public void linesComparision(BufferedReader br1, BufferedReader br2) throws IOException {
+        String linesOfRNB1;
+        String linesOfRNB2;
+        try {
+            while (((linesOfRNB1 = br1.readLine()) != null && (linesOfRNB2 = br2.readLine()) != null)) {
+                if (linesOfRNB1.equals(linesOfRNB2))
+                    System.out.println("**Line Comparision Success**");
+                else {
+                    System.out.println("**Line Comparision Failure**" + "\n" + "Line from RNB1: " + linesOfRNB1 + "\n" + "Line from RNB2: " + linesOfRNB2);
+                }
+            }
+        } catch (IOException e) {
+            throw new IOException("Problem reading a line", e);
+        }
+    }
+
+    public boolean fileComparision(File file1, File file2) throws IOException {
+        return FileUtils.contentEquals(file1, file2); }
+
+    public static void main(String[] args) throws IOException {
 
         BufferedReader br1 = new BufferedReader(new FileReader("src/main/resources/RNB1.txt"));
         BufferedReader br2 = new BufferedReader(new FileReader("src/main/resources/RNB2.txt"));
 
-        String str1;
-        String str2;
-        while((str1= br1.readLine()) != null){
-            System.out.println(str1);
+        File file1 = new File("src/main/resources/RNB1.txt");
+        File file2 = new File("src/main/resources/RNB2.txt");
+
+        App diffAppObject = new App();
+        diffAppObject.schemaComparision(br1, br2);
+        diffAppObject.fileComparision(file1, file2);
+
         }
-
-        System.out.println("This is the file3 count: "+br1.readLine().length());
-
-
-        System.out.println("This is the File INput stream count file3 count: "+file3);
-
-
-        int s=file3.compareTo(file4);
-        boolean compare1and2 = FileUtils.contentEquals(file3, file4);
-        System.out.println("Are test1.txt and test2.txt the same? " + compare1and2);
-    }
-
-    public void compareRecordCount(File file3,File file4)
-    {
-    if(file3.length()==file4.length())
-{
-    System.out.println("");
-    compareSchema(file3,file4);
 }
-else System.out.println();
 
-    }
-
-    public void compareSchema(File file3,File file4){
-        file3.equals(file4);
-
-    }
-}
 
 

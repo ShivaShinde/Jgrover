@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="com.ipg.diff.tool.java.AppTest" time="0.002" errors="0" skipped="0">
+<testsuite tests="10" failures="0" name="com.ipg.diff.tool.java.AppTest" time="0.016" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre/lib"/>
@@ -33,7 +33,6 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="maven.test.failure.ignore" value="true"/>
     <property name="os.version" value="10.12.6"/>
     <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.5.3/libexec/lib/jansi-native"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
@@ -47,7 +46,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_66.jdk/Contents/Home/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.test.failure.ignore=true install"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean package"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
     <property name="awt.toolkit" value="sun.lwawt.macosx.LWCToolkit"/>
@@ -65,5 +64,14 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="com.ipg.diff.tool.java.AppTest" name="linesTest" time="0.002"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="fileLengthTest" time="0.005"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="lineComparisionTest" time="0"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="fileDirectoryLocationTest" time="0.007"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="hashedFileComparisionTest" time="0"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="configFileFormatTest" time="0.001"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="fileLocationTest" time="0.001"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="configTest" time="0"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="filesSchemaTest" time="0.001"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="fileFormatTest" time="0"/>
+  <testcase classname="com.ipg.diff.tool.java.AppTest" name="fileContentTest" time="0.001"/>
 </testsuite>

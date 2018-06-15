@@ -1,8 +1,8 @@
 package com.ipg.diff.tool.java;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.IOException;
@@ -13,6 +13,12 @@ import org.apache.commons.io.FileUtils;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import static junit.framework.Assert.assertNotSame;
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNotNull;
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 
 /**
  * Unit test for Diff App.
@@ -20,26 +26,81 @@ import org.junit.runners.JUnit4;
 
 public class AppTest
 {
-
+    File file1 = new File("src/main/resources/RNB1.txt");
+    File file2 = new File("src/main/resources/RNB2.txt");
+    File config = new File("src/main/resources/config.yaml");
 
     @org.junit.Test
-    public void linesTest() throws IOException
+    public void fileLocationTest() throws IOException
     {
-        String file1 = "files/RNB3.txt";
-        String file2 = "files/RNB4.txt";
-
-        File file3 = new File(file1);
-        File file4 = new File(file2);
-
-        System.out.println(file3.length());
-
-        assert(file3.length()==file4.length());
+        assertTrue(Files.exists(file1.toPath()));
+        assertTrue(Files.exists(file1.toPath()));
     }
 
-//    public void schemaTest() throws IOException
-//    {
-//        List lst1=FileUtils.readLines(file3,  "UTF_8");
-//        List lst2=FileUtils.readLines(file4,  "UTF_8");
-//        assert(lst1.get(0).toString().split(",").length==lst2.get(0).toString().split(",").length);
-//    }
+    @org.junit.Test
+    public void fileDirectoryLocationTest() throws IOException
+    {
+        assertFalse(Files.isDirectory(file1.toPath()));
+        assertFalse(Files.isDirectory(file2.toPath()));
+    }
+
+    @org.junit.Test
+    public void fileFormatTest() throws IOException
+    {
+        assertTrue(Files.isReadable(file1.toPath()));
+        assertTrue(Files.isReadable(file2.toPath()));
+    }
+
+    @org.junit.Test
+    public void configTest() throws IOException
+    {
+        assertTrue(Files.exists(config.toPath()));
+    }
+
+    @org.junit.Test
+    public void configFileFormatTest() throws IOException
+    {
+        assertTrue(Files.isReadable(config.toPath()));
+    }
+
+    @org.junit.Test
+    public void fileContentTest() throws IOException
+    {
+        assertEquals(file1.length(),file2.length());
+    }
+
+    @org.junit.Test
+    public void filesSchemaTest() throws IOException
+    {
+        BufferedReader br1 = new BufferedReader(new FileReader("src/main/resources/RNB1.txt"));
+        BufferedReader br2 = new BufferedReader(new FileReader("src/main/resources/RNB2.txt"));
+
+        assertTrue("Testing the schema",br1.readLine().equals(br2.readLine()));
+    }
+
+    @org.junit.Test
+    public void fileLengthTest() throws IOException
+    {
+        assertEquals(file1.length(),file2.length());
+    }
+
+    @org.junit.Test
+    public void hashedFileComparisionTest() throws IOException
+    {
+        assertNotSame(file1.hashCode(),file2.hashCode());
+    }
+
+    @org.junit.Test
+    public void lineComparisionTest() throws IOException
+    {
+        String linesOfRNB1;
+        String linesOfRNB2;
+        BufferedReader br1 = new BufferedReader(new FileReader("src/main/resources/RNB1.txt"));
+        BufferedReader br2 = new BufferedReader(new FileReader("src/main/resources/RNB2.txt"));
+
+            while (((linesOfRNB1 = br1.readLine()) != null && (linesOfRNB2 = br2.readLine()) != null)) {
+                assertEquals(linesOfRNB1, linesOfRNB2);
+            }
+    }
+
 }

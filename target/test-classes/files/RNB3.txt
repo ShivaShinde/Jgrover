@@ -1,3 +1,0 @@
-id  name    status
-1   shiva   on
-2   melvin  on
